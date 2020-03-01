@@ -76,3 +76,11 @@ class AnchorKmeans(object):
         union = box_area[:, np.newaxis] + anchor_area[np.newaxis]
 
         return inter / (union - inter)
+
+    def avg_iou(self):
+        """
+        Calculate the average IOU with closest anchor.
+
+        :return: None
+        """
+        return np.mean(self.ious_[np.arange(len(self.labels_)), self.labels_])
