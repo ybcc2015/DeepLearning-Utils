@@ -6,7 +6,7 @@ import json
 import cv2
 
 
-class AnnotParse(object):
+class AnnotParser(object):
     def __init__(self, file_type):
         assert file_type in ['csv', 'xml', 'json'], "Unsupported file type."
         self.file_type = file_type
