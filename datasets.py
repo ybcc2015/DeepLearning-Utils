@@ -11,26 +11,25 @@ class AnnotParse(object):
         assert file_type in ['csv', 'xml', 'json'], "Unsupported file type."
         self.file_type = file_type
 
-    def parse(self, path):
+    def parse(self, annot_dir):
         """
+        Parse annotation file, the file type must be csv or xml or json.
 
-        :param path: directory path to annotation files
-        :return: 2-d array
+        :param annot_dir: directory path of annotation files
+        :return: 2-d array, shape as (n, 2), each row represents a bbox, and each column
+                 represents the corresponding width and height after normalized
         """
         if self.file_type == 'xml':
-            return self.parse_xml(path)
+            return self.parse_xml(annot_dir)
         elif self.file_type == 'json':
-            return self.parse_json(path)
+            return self.parse_json(annot_dir)
         else:
-            return self.parse_csv(path)
+            return self.parse_csv(annot_dir)
 
     @staticmethod
     def parse_xml(annot_dir):
         """
-        Parse XML annotation files in VOC dataset.
-
-        :param annot_dir: directory path to annotation files
-        :return: 2-d array
+        Parse xml annotation file.
         """
         boxes = []
 
@@ -56,10 +55,7 @@ class AnnotParse(object):
     @staticmethod
     def parse_json(annot_dir):
         """
-        Parse json annotation files.
-
-        :param annot_dir: directory path to annotation files
-        :return: 2-d array
+        Parse json annotation file.
         """
         boxes = []
 
@@ -85,27 +81,25 @@ class AnnotParse(object):
         return np.array(boxes)
 
     @staticmethod
-    def parse_csv(file_path):
+    def parse_csv(annot_dir):
         """
         Parse csv annotation file.
-
-        :param file_path: path of the csv file
-        :return: 2-d array
         """
         boxes = []
 
-        with open(file_path) as f:
-            lines = f.readlines()
+        for csv_file in glob.glob(os.path.join(annot_dir, '*.csv')):
+            with open(annot_dir) as f:
+                lines = f.readlines()
 
-        for line in lines:
-            items = line.strip().split(',')
-            img = cv2.imread(items[0])
-            h_img, w_img = img.shape[:2]
-            xmin, ymin, xmax, ymax = list(map(int, items[1:-1]))
+            for line in lines:
+                items = line.strip().split(',')
+                img = cv2.imread(items[0])
+                h_img, w_img = img.shape[:2]
+                xmin, ymin, xmax, ymax = list(map(int, items[1:-1]))
 
-            w_norm = (xmax - xmin) / w_img
-            h_norm = (ymax - ymin) / h_img
+                w_norm = (xmax - xmin) / w_img
+                h_norm = (ymax - ymin) / h_img
 
-            boxes.append([w_norm, h_norm])
+                boxes.append([w_norm, h_norm])
 
         return np.array(boxes)
