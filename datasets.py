@@ -7,7 +7,7 @@ import json
 
 def parse_xml(annot_dir):
     """
-    Parse XML annotation files in VOC dataset
+    Parse XML annotation files in VOC dataset.
 
     :param annot_dir: directory path to annotation files
     :return: 2-d array
@@ -34,12 +34,11 @@ def parse_xml(annot_dir):
     return np.array(boxes)
 
 
-# dir_path = r'E:\dataset\jingguang\001\L_mirror_rois'
-# TODO 完善注释
 def parse_json(annot_dir):
     """
+    Parse json annotation files from labelme.
 
-    :param annot_dir:
+    :param annot_dir: directory path to annotation files
     :return: 2-d array
     """
     boxes = []
