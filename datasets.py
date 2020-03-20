@@ -88,7 +88,7 @@ class AnnotParser(object):
         boxes = []
 
         for csv_file in glob.glob(os.path.join(annot_dir, '*.csv')):
-            with open(annot_dir) as f:
+            with open(csv_file) as f:
                 lines = f.readlines()
 
             for line in lines:
