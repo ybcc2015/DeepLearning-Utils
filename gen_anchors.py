@@ -1,7 +1,39 @@
 from kmeans import AnchorKmeans
-from datasets import parse_xml
+from datasets import AnnotParser
 import argparse
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-p", "--path", required=True, help="path to annotations directory")
-args = vars(ap.parse_args())
+
+def main(args):
+    file_type = args["type"]
+    k = args["k_clusters"]
+    annot_dir = args["dir_path"]
+    parser = AnnotParser(file_type)
+
+    print("[INFO] Load datas from {}".format(annot_dir))
+    boxes = parser.parse(annot_dir)
+
+    print("[INFO] Initialize model")
+    model = AnchorKmeans(k)
+
+    print("[INFO] Training...")
+    model.fit(boxes)
+
+    anchors = model.anchors_
+    print("[INFO] The results anchors:\n{}".format(anchors))
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("dir_path", help="directory path of annotation file")
+    ap.add_argument("-t",
+                    "--type",
+                    choices=['xml', 'json', 'csv'],
+                    default='xml',
+                    help="file type")
+    ap.add_argument("-k",
+                    "--k_clusters",
+                    type=int,
+                    default=5,
+                    help="the number of clusters")
+    args = vars(ap.parse_args())
+    main(args)
