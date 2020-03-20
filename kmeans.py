@@ -21,6 +21,8 @@ class AnchorKmeans(object):
         :param boxes: 2-d array, shape(n, 2), form as (w, h)
         :return: None
         """
+        assert self.k < len(boxes), "K must be less than the number of data."
+
         # If the current number of iterations is greater than 0, then reset
         if self.n_iter > 0:
             self.n_iter = 0
