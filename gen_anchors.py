@@ -24,7 +24,10 @@ def main(args):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("dir_path", help="directory path of annotation file")
+    ap.add_argument("-d",
+                    "--dir_path",
+                    required=True,
+                    help="directory path of annotation files")
     ap.add_argument("-t",
                     "--type",
                     choices=['xml', 'json', 'csv'],
