@@ -17,7 +17,7 @@ python gen_anchors.py -d /path to your/annotations-dir -t [annotation file type,
 
 I have tested it on the VOC2012 dataset, the trend of average iou with k value is shown in the figure below
 
-![](.\imgs\avgiou.png)
+![](./imgs/avgiou.png)
 
-See the detailed test code in [demo.ipynb](.\demo.ipynb)
+See the detailed test code in [demo.ipynb](./demo.ipynb)
 
