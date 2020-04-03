@@ -29,7 +29,7 @@ class AnnotParser(object):
     @staticmethod
     def parse_xml(annot_dir):
         """
-        Parse xml annotation file.
+        Parse xml annotation file in VOC.
         """
         boxes = []
 
@@ -55,7 +55,7 @@ class AnnotParser(object):
     @staticmethod
     def parse_json(annot_dir):
         """
-        Parse json annotation file.
+        Parse labelme json annotation file.
         """
         boxes = []
 
