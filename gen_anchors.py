@@ -32,7 +32,7 @@ if __name__ == "__main__":
                     "--type",
                     choices=['xml', 'json', 'csv'],
                     default='xml',
-                    help="file type")
+                    help="type of annotation file")
     ap.add_argument("-k",
                     "--k_clusters",
                     type=int,
